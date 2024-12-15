@@ -1,0 +1,19 @@
+
+<div>
+  <h4>Enter Your Details</h4>
+  <form [formGroup]="formDetails">
+    <input formControlName="name" type="text" />
+    <app-uikit-date-picker
+      [label]="'Date'"
+      [dateRange]="false"
+      [dateFormat]="'DD MMM yyyy'"
+      formControlName="birthday"
+      [required]="true"
+      [readOnly]="false"
+      [isDisabled]="false"
+      [tooltip]="'Interaction date'"
+    >
+    </app-uikit-date-picker>
+  </form>
+</div>
+<button (click)="getDetails()" color="accent">Click me!</button>

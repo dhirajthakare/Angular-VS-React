@@ -1,0 +1,60 @@
+.field-wrapper {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    margin-bottom: 12px;
+  
+    .label-container {
+      display: flex;
+      align-items: center;
+      column-gap: 4px;
+      justify-content: space-between;
+  
+      .label-content {
+        display: flex;
+        align-items: center;
+        column-gap: 4px;
+        .info-icon {
+          padding-left: 4px;
+        }
+        .required-text {
+          color: red;
+          display: flex;
+          align-self: flex-start;
+          padding-top: 3px;
+          height: v12;
+          font-size: 12px;
+  
+          .icon-asterisk {
+            width: 8px;
+            height: 8px;
+            background-size: cover;
+          }
+        }
+  
+        .optional-text {
+          color: #94969e;
+        }
+  
+        .disabled-label {
+          color: #94969e;
+        }
+      }
+      .user-tag-icon {
+        cursor: pointer;
+      }
+    }
+  
+    &.invalid {
+      input,
+      textarea {
+        border: 1.5px solid #d82323;
+        outline: none;
+      }
+    }
+    .field-errors {
+      padding-left: 16px;
+    }
+  }
+  

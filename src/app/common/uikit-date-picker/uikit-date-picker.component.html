@@ -1,0 +1,102 @@
+<app-uikit-field-wrapper
+  class="date-picker-container"
+  [label]="label"
+  [required]="required"
+  [readonly]="readOnly"
+  [control]="control"
+  [tooltip]="tooltip"
+  [disabled]="isDisabled"
+  [showLabel]="showLabel"
+>
+  <div class="single-date" *ngIf="!dateRange && !readOnly">
+    <mat-form-field
+      class="form-field-control"
+      appearance="fill"
+      [ngClass]="{ 'field-disabled': isDisabled }"
+      tabindex="0"
+      (keyup.enter)="picker.open()"
+    >
+      <div class="calender-inner-container">
+        <input
+          class="date-input date-input-font body-3"
+          matInput
+          (click)="picker.open()"
+          [formControl]="control"
+          [matDatepicker]="picker"
+          placeholder="Select Date"
+          (dateChange)="addEvent($event)"
+          autocomplete="off"
+          readonly="true"
+          [min]="minDate"
+          [max]="maxDate"
+          [disabled]="isDisabled"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <span matDatepickerToggleIcon>
+            <!-- <uikit-icon name="calender" class="calender-icon"></uikit-icon> -->
+          </span>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker [panelClass]="'custom-date-picker'"></mat-datepicker>
+      </div>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="dateRange && !readOnly" class="date-range">
+    <mat-form-field appearance="fill" [ngClass]="{ 'make-focused': isFocused, 'field-disabled': isDisabled }">
+      <mat-date-range-input class="align-input" [formGroup]="range" *ngIf="range" [rangePicker]="rangePicker">
+        <input
+          class="date-input-font body-3"
+          matStartDate
+          (focus)="isFocused = true"
+          (focusout)="isFocused = false"
+          formControlName="start"
+          (dateChange)="startDateRangeChange()"
+          placeholder="Start date"
+          autocomplete="off"
+        />
+        <input
+          class="date-input-font body-3"
+          matEndDate
+          (focus)="isFocused = true"
+          (focusout)="isFocused = false"
+          formControlName="end"
+          (dateChange)="endDateRangeChange()"
+          placeholder="End date"
+          autocomplete="off"
+        />
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="rangePicker">
+        <span matDatepickerToggleIcon>
+          <!-- <uikit-icon name="calender" class="align-icon"></uikit-icon> -->
+        </span>
+      </mat-datepicker-toggle>
+      <mat-date-range-picker
+        #rangePicker
+        [panelClass]="'custom-date-picker'"
+        (opened)="onDatePickerOpened()"
+      ></mat-date-range-picker>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="readOnly && control">
+    <div *ngIf="dateRange && control.value">
+      <p class="body-7">Period</p>
+      <div class="date-range-display">
+        <div class="date-display">
+          <span class="body-7">From:</span
+          ><span class="body-3" *ngIf="control.value.start">{{ control.value.start }}</span>
+        </div>
+
+        <span>
+            <!-- <uikit-icon name="arrow-right" size="small"></uikit-icon> -->
+        </span>
+        <div class="date-display">
+          <span class="body-7">To :</span><span class="body-3" *ngIf="control.value.end">{{ control.value.end }}</span>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!dateRange && control.value">
+      <span class="body-2">{{ control.value }}</span>
+    </div>
+  </div>
+</app-uikit-field-wrapper>

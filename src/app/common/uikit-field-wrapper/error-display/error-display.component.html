@@ -1,0 +1,9 @@
+<div class="error-container" *ngIf="errorMessages && errorMessages.length > 0">
+  <div class="error">
+    <ul class="error-list title-2">
+      <li *ngFor="let item of errorMessages">
+        <span *ngIf="item">{{ item }}</span>
+      </li>
+    </ul>
+  </div>
+</div>

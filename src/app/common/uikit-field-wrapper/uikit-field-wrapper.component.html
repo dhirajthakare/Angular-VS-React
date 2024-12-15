@@ -1,0 +1,47 @@
+<div
+  class="field-wrapper {{
+    control && control.errors && (control.dirty || control.touched) ? 'field-wrapper-error' : ''
+  }}"
+>
+  <div class="label-container" *ngIf="label && showLabel">
+    <div class="label-content">
+      <span class="body-7" [ngClass]="{ 'disabled-label': disabled }">
+        {{ label }}
+      </span>
+      <span class="caption-2 required-text" *ngIf="required && !readonly && !disabled"
+        >
+        <mat-icon class="icon-asterisk"></mat-icon>
+    </span>
+      <span class="body-7 optional-text" *ngIf="!required && !readonly && !disabled">(Optional)</span>
+      <!-- <uikit-icon
+        name="info-outline"
+        size="small"
+        *ngIf="readonly || disabled"
+        uikitTooltip
+        [tooltipDesc]="tooltip"
+      ></uikit-icon> -->
+      <div class="info-icon">
+        <!-- <uikit-icon
+          name="info-outline"
+          [size]="tooltipSize"
+          *ngIf="showInfoIcon"
+          uikitTooltip
+          [tooltipDesc]="infoIconTooltip"
+        ></uikit-icon> -->
+      </div>
+    </div>
+    <!-- <uikit-icon
+      *ngIf="showUserTag"
+      class="user-tag-icon"
+      name="user-tag"
+      size="medium"
+      (clicked)="userTagBtn()"
+    ></uikit-icon> -->
+  </div>
+  <ng-content #fieldComponent></ng-content>
+  <app-uikit-error-display
+    class="field-errors"
+    [errorMessages]="errorMessages"
+    *ngIf="control && control.errors && (control.dirty || control.touched)"
+  ></app-uikit-error-display>
+</div>
